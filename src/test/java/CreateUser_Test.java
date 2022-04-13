@@ -37,7 +37,7 @@ public class CreateUser_Test {
         .as(UserResponse.class)
         .getType();
 
-    Assert.assertEquals(actualRes, user.getId());
+    Assert.assertEquals(actualRes, Integer.toString(user.getId()));
     Assert.assertEquals(type, "unknown");
 
   }
