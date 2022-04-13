@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.19">
+<file name="D:\rest_assured\src\main\java\services\UserApi.java">
+<error line="7" severity="error" message="Import statement for &apos;io.restassured.RestAssured.given&apos; is in the wrong order. Should be in the &apos;STATIC&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+</file>
+<file name="D:\rest_assured\src\test\java\CreateUser_Test.java">
+<error line="8" severity="error" message="Import statement for &apos;org.hamcrest.Matchers.equalTo&apos; is in the wrong order. Should be in the &apos;STATIC&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+</file>
+</checkstyle>
