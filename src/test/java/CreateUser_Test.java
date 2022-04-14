@@ -1,9 +1,11 @@
 import dto.User;
 import dto.UserResponse;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import services.UserApi;
+
 import static org.hamcrest.Matchers.equalTo;
 
 public class CreateUser_Test {
@@ -24,18 +26,13 @@ public class CreateUser_Test {
         .then()
         .log().all()
         .statusCode(200)
-        .body("type", equalTo("unknown"));
+        .body("type", equalTo("unknown"))
+        .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/CreateUser.json"));
 
     Response response = userApi.createUser(user);
-    String actualRes = response
-        .jsonPath()
-        .get("message");
+    String actualRes = response.jsonPath().get("message");
 
-    String type = response
-        .then()
-        .extract()
-        .as(UserResponse.class)
-        .getType();
+    String type = response.then().extract().as(UserResponse.class).getType();
 
     Assert.assertEquals(actualRes, Integer.toString(user.getId()));
     Assert.assertEquals(type, "unknown");
