@@ -8,7 +8,8 @@ import static io.restassured.RestAssured.given;
 
 public class UserApi {
   public static String BASE_URL = "https://petstore.swagger.io/v2";
-  public static String PATH = "/user";
+  public static String CREATE_USER_PATH = "/user";
+  public static String GET_USER_PATH = "/user/";
   private final RequestSpecification spec;
 
   public UserApi() {
@@ -23,6 +24,13 @@ public class UserApi {
         .log().all()
         .body(user)
         .when()
-        .post(PATH);
+        .post(CREATE_USER_PATH);
+  }
+
+  public Response getUser(String username) {
+    return given(spec)
+        .log().all()
+        .when()
+        .get(GET_USER_PATH + username);
   }
 }

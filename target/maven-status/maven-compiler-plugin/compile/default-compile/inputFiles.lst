@@ -1,3 +1,4 @@
-D:\rest_assured\src\main\java\dto\UserResponse.java
+D:\rest_assured\src\main\java\dto\CreateUserResponseBody.java
+D:\rest_assured\src\main\java\dto\GetUserResponseBody.java
 D:\rest_assured\src\main\java\dto\User.java
 D:\rest_assured\src\main\java\services\UserApi.java

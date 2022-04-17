@@ -11,7 +11,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonSerialize
-public class UserResponse {
+public class CreateUserResponseBody {
   private int code;
   private String type;
   private String message;
