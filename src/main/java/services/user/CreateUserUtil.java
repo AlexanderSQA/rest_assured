@@ -1,11 +1,14 @@
-package services;
+package services.user;
 
-import dto.User;
+import dto.user.User;
 
+//TODO доработать генератор юзеров, чтобы вынести его из теста
 public class CreateUserUtil {
 
-  public static void generateUser() {
-    User user = User.builder()
+  static User user = new User();
+
+  public static User generateUser() {
+    return user = User.builder()
         .firstName("Ivan")
         .lastName("Ivanovich")
         .username("Ivan123")

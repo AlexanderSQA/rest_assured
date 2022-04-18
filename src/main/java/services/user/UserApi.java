@@ -1,13 +1,13 @@
-package services;
+package services.user;
 
-import dto.User;
+import dto.user.User;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import static io.restassured.RestAssured.given;
 
 public class UserApi {
-  public static String BASE_URL = "https://petstore.swagger.io/v2";
+  public static final String BASE_URL = "https://petstore.swagger.io/v2";
   public static String CREATE_USER_PATH = "/user";
   public static String GET_USER_PATH = "/user/";
   private final RequestSpecification spec;
