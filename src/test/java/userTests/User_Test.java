@@ -3,7 +3,7 @@ package userTests;
 import dto.user.CreateUserResponseBody;
 import dto.user.GetUserResponseBody;
 import dto.user.User;
-import io.restassured.response.Response;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import services.user.Specifications;
@@ -18,7 +18,7 @@ public class User_Test {
   //Проверить, что при создании Юзера в поле type записывается значение "unknown"
   @Test
   public void checkCreateUser() {
-    Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpecSchemaPlus200("schema/user/CreateUser.json"));
+    Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpec200());
     User user = User.builder()
         .firstName("Ivan")
         .lastName("Ivanovich")
@@ -30,18 +30,14 @@ public class User_Test {
         .phone("+79" + ((int) (Math.random() * 999999999)))
         .build();
 
-    userApi.createUser(user).
-        then().
-        log().all();
+    CreateUserResponseBody userResponseBody = userApi.createUser(user).
+        then()
+        .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/user/CreateUser.json"))
+        .log().all()
+        .extract().as(CreateUserResponseBody.class);
 
-
-    Response response = userApi.createUser(user);
-    String actualRes = response.jsonPath().get("message");
-
-    String type = response.then().extract().as(CreateUserResponseBody.class).getType();
-
-    Assert.assertEquals(actualRes, Integer.toString(user.getId()));
-    Assert.assertEquals(type, "unknown");
+    Assert.assertEquals(userResponseBody.getType(), "unknown");
+    Assert.assertEquals(userResponseBody.getMessage(), Integer.toString(user.getId()));
   }
 
   //Проверить, что домен почты у пользователя "@ya.ru"
@@ -49,7 +45,7 @@ public class User_Test {
   //Проверить, что пароль не пустой
   @Test
   public void checkGetUser() {
-    Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpecSchemaPlus200("schema/user/GetUser.json"));
+    Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpec200());
     User user = User.builder()
         .firstName("Ivan")
         .lastName("Ivanovich")
@@ -61,18 +57,16 @@ public class User_Test {
         .phone("+79301543521")
         .build();
 
-    userApi.getUser(user.getUsername())
+
+    GetUserResponseBody userResponseBody = userApi.getUser(user.getUsername())
         .then()
-        .log().all();
+        .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/user/GetUser.json"))
+        .log().all().extract().as(GetUserResponseBody.class);
 
 
-    Response response = userApi.getUser(user.getUsername());
-    String phone = response.then().extract().as(GetUserResponseBody.class).getPhone();
-
-
-    Assert.assertEquals(phone, user.getPhone());
-    Assert.assertTrue(user.getEmail().endsWith("@ya.ru"));
-    Assert.assertTrue(user.getPhone().startsWith("+79"));
+    Assert.assertEquals(userResponseBody.getPhone(), user.getPhone());
+    Assert.assertTrue(userResponseBody.getEmail().endsWith("@ya.ru"));
+    Assert.assertTrue(userResponseBody.getPhone().startsWith("+79"));
     Assert.assertNotNull(user.getPassword());
   }
 }
