@@ -1,4 +1,4 @@
-package userTests;
+package usertests;
 
 import dto.user.GetUserLoginResponse;
 import dto.user.User;

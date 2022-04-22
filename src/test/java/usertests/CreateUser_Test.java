@@ -1,4 +1,4 @@
-package userTests;
+package usertests;
 
 import dto.user.CreateUserResponseBody;
 import dto.user.User;
@@ -29,8 +29,8 @@ public class CreateUser_Test {
         .phone("+79" + ((int) (Math.random() * 999999999)))
         .build();
 
-    CreateUserResponseBody userResponseBody = userApi.createUser(user).
-        then()
+    CreateUserResponseBody userResponseBody = userApi.createUser(user)
+        .then()
         .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/user/CreateUser.json"))
         .log().all()
         .extract().as(CreateUserResponseBody.class);
