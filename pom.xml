@@ -12,8 +12,16 @@
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
 
-        <base_url>https://petstore.swagger.io/v2</base_url>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>production</id>
+            <properties>
+                <base_url>https://petstore.swagger.io/v2</base_url>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>

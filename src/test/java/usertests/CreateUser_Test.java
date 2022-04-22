@@ -1,6 +1,7 @@
 package usertests;
 
 import dto.user.CreateUserResponseBody;
+import dto.user.GetUserResponseBody;
 import dto.user.User;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import org.testng.Assert;
@@ -29,14 +30,21 @@ public class CreateUser_Test {
         .phone("+79" + ((int) (Math.random() * 999999999)))
         .build();
 
-    CreateUserResponseBody userResponseBody = userApi.createUser(user)
+    userApi.createUser(user)
         .then()
         .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/user/CreateUser.json"))
         .log().all()
         .extract().as(CreateUserResponseBody.class);
 
-    Assert.assertEquals(userResponseBody.getType(), "unknown");
-    Assert.assertEquals(userResponseBody.getMessage(), Integer.toString(user.getId()));
+    GetUserResponseBody userResponseBody = userApi.getUser(user.getUsername())
+        .then()
+        .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/user/GetUser.json"))
+        .log().all().extract().as(GetUserResponseBody.class);
+
+    Assert.assertEquals(userResponseBody.getPhone(), user.getPhone());
+    Assert.assertTrue(userResponseBody.getEmail().endsWith("@ya.ru"));
+    Assert.assertTrue(userResponseBody.getPhone().startsWith("+79"));
+    Assert.assertNotNull(user.getPassword());
   }
 }
 

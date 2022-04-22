@@ -1,7 +1,8 @@
-#Fri Apr 22 21:06:44 MSK 2022
+#Sat Apr 23 00:05:26 MSK 2022
 configuration*?=ABA2855CE6BF20D883881DA931C763E0760F7353
 D\:\\rest_assured\\src\\main\\java\\dto\\user\\CreateUserResponseBody.java=1650291902103
+D\:\\rest_assured\\src\\main\\java\\dto\\user\\DeleteUserResponseBody.java=1650661106659
 D\:\\rest_assured\\src\\main\\java\\dto\\user\\GetUserResponseBody.java=1650291902091
-D\:\\rest_assured\\src\\main\\java\\dto\\user\\GetUserLoginResponse.java=1650630086134
+D\:\\rest_assured\\src\\main\\java\\dto\\user\\GetUserLoginResponse.java=1650654357561
 D\:\\rest_assured\\src\\main\\java\\dto\\user\\User.java=1650291902099
 D\:\\rest_assured\\src\\main\\java\\services\\user\\Specifications.java=1650316858376
