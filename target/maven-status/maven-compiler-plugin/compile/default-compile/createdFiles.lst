@@ -1,2 +1,12 @@
 dto\user\DeleteUserResponseBody.class
+dto\user\GetUserLoginResponse.class
+dto\user\GetUserResponseBody.class
+dto\user\GetUserResponseBody$GetUserResponseBodyBuilder.class
+dto\user\User.class
+dto\user\GetUserLoginResponse$GetUserLoginResponseBuilder.class
 dto\user\DeleteUserResponseBody$DeleteUserResponseBodyBuilder.class
+services\user\UserApi.class
+dto\user\CreateUserResponseBody.class
+dto\user\CreateUserResponseBody$CreateUserResponseBodyBuilder.class
+dto\user\User$UserBuilder.class
+services\user\Specifications.class

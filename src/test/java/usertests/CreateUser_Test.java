@@ -1,5 +1,8 @@
 package usertests;
 
+import static services.user.UserApi.BASE_URL;
+
+import com.github.javafaker.Faker;
 import dto.user.CreateUserResponseBody;
 import dto.user.GetUserResponseBody;
 import dto.user.User;
@@ -9,10 +12,10 @@ import org.testng.annotations.Test;
 import services.user.Specifications;
 import services.user.UserApi;
 
-import static services.user.UserApi.BASE_URL;
 
 public class CreateUser_Test {
   UserApi userApi = new UserApi();
+  Faker faker = new Faker();
 
   //Проверить, что при создании Юзера в поле message записывается id нового пользователя
   //Проверить, что при создании Юзера в поле type записывается значение "unknown"
@@ -20,14 +23,14 @@ public class CreateUser_Test {
   public void checkCreateUser() {
     Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpec200());
     User user = User.builder()
-        .firstName("Ivan")
-        .lastName("Ivanovich")
-        .username("Ivan" + (int) (Math.random() * 100000))
-        .password("123")
-        .id((int) (Math.random() * 100000))
-        .userStatus((int) (Math.random() * 10))
-        .email("example" + ((int) (Math.random() * 100000)) + "@ya.ru")
-        .phone("+79" + ((int) (Math.random() * 999999999)))
+        .firstName(faker.name().firstName())
+        .lastName(faker.name().lastName())
+        .username(faker.name().username())
+        .password(faker.internet().password())
+        .id(faker.number().numberBetween(1, 10000000))
+        .userStatus(faker.number().numberBetween(0, 10))
+        .email(faker.internet().emailAddress())
+        .phone(faker.phoneNumber().cellPhone())
         .build();
 
     userApi.createUser(user)
@@ -42,8 +45,8 @@ public class CreateUser_Test {
         .log().all().extract().as(GetUserResponseBody.class);
 
     Assert.assertEquals(userResponseBody.getPhone(), user.getPhone());
-    Assert.assertTrue(userResponseBody.getEmail().endsWith("@ya.ru"));
-    Assert.assertTrue(userResponseBody.getPhone().startsWith("+79"));
+    Assert.assertNotNull(userResponseBody.getEmail());
+    Assert.assertNotNull(userResponseBody.getPhone());
     Assert.assertNotNull(user.getPassword());
   }
 }

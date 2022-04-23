@@ -1,11 +1,12 @@
 package services.user;
 
+import static io.restassured.RestAssured.given;
+
 import dto.user.User;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-import static io.restassured.RestAssured.given;
 
 public class UserApi {
   //  public static final String BASE_URL = System.getProperty("base_url").toLowerCase(Locale.ROOT);

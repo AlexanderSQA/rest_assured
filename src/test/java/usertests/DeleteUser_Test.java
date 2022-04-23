@@ -1,5 +1,9 @@
 package usertests;
 
+import static org.hamcrest.Matchers.equalTo;
+import static services.user.UserApi.BASE_URL;
+
+import com.github.javafaker.Faker;
 import dto.user.CreateUserResponseBody;
 import dto.user.DeleteUserResponseBody;
 import dto.user.User;
@@ -10,11 +14,10 @@ import org.testng.annotations.Test;
 import services.user.Specifications;
 import services.user.UserApi;
 
-import static org.hamcrest.Matchers.equalTo;
-import static services.user.UserApi.BASE_URL;
 
 public class DeleteUser_Test {
   UserApi userApi = new UserApi();
+  Faker faker = new Faker();
 
   //Проверить, что домен почты у пользователя "@ya.ru"
   //Проверить, что телефон у клиента начинается с "+79"
@@ -23,14 +26,14 @@ public class DeleteUser_Test {
   public void checkGetUser() {
     Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpecUnique(404));
     User user = User.builder()
-        .firstName("Ivan")
-        .lastName("Ivanovich")
-        .username("Ivan1234")
-        .password("1234")
-        .id(44863)
-        .userStatus(3)
-        .email("example95046@ya.ru")
-        .phone("+79301543521")
+        .firstName(faker.name().firstName())
+        .lastName(faker.name().lastName())
+        .username(faker.name().username())
+        .password(faker.internet().password())
+        .id(faker.number().numberBetween(1, 10000000))
+        .userStatus(faker.number().numberBetween(0, 10))
+        .email(faker.internet().emailAddress())
+        .phone(faker.phoneNumber().cellPhone())
         .build();
 
     userApi.createUser(user)

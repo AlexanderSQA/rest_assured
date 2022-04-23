@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.19">
+<file name="D:\rest_assured\src\main\java\dto\user\CreateUserResponseBody.java">
+</file>
+<file name="D:\rest_assured\src\main\java\dto\user\DeleteUserResponseBody.java">
+</file>
+<file name="D:\rest_assured\src\main\java\dto\user\GetUserLoginResponse.java">
+</file>
+<file name="D:\rest_assured\src\main\java\dto\user\GetUserResponseBody.java">
+</file>
+<file name="D:\rest_assured\src\main\java\dto\user\User.java">
+</file>
+<file name="D:\rest_assured\src\main\java\services\user\Specifications.java">
+</file>
 <file name="D:\rest_assured\src\main\java\services\user\UserApi.java">
-<error line="10" severity="error" message="Import statement for &apos;io.restassured.RestAssured.given&apos; is in the wrong order. Should be in the &apos;STATIC&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 </file>
 <file name="D:\rest_assured\src\test\java\usertests\CreateUser_Test.java">
-<error line="12" severity="error" message="Import statement for &apos;services.user.UserApi.BASE_URL&apos; is in the wrong order. Should be in the &apos;STATIC&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 </file>
 <file name="D:\rest_assured\src\test\java\usertests\DeleteUser_Test.java">
-<error line="13" severity="error" message="Import statement for &apos;services.user.UserApi.BASE_URL&apos; is in the wrong order. Should be in the &apos;STATIC&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 </file>
 <file name="D:\rest_assured\src\test\java\usertests\GetUserLogin_Test.java">
-<error line="11" severity="error" message="Import statement for &apos;services.user.UserApi.BASE_URL&apos; is in the wrong order. Should be in the &apos;STATIC&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 </file>
 </checkstyle>
