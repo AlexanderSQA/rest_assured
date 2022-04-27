@@ -5,12 +5,14 @@ import static io.restassured.RestAssured.given;
 import dto.user.User;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
+import java.util.Locale;
 
 
 public class UserApi {
-  //  public static final String BASE_URL = System.getProperty("base_url").toLowerCase(Locale.ROOT);
-  public static final String BASE_URL = "https://petstore.swagger.io/v2";
+  public static final String BASE_URL = System.getProperty("base_url").toLowerCase(Locale.ROOT);
+//  public static final String BASE_URL = "https://petstore.swagger.io/v2";
   private final RequestSpecification spec;
 
   public UserApi() {
@@ -20,19 +22,21 @@ public class UserApi {
         .contentType(ContentType.JSON);
   }
 
-  public Response createUser(User user) {
+  public ValidatableResponse createUser(User user) {
     return given(spec)
         .log().all()
         .body(user)
         .when()
-        .post();
+        .post()
+        .then();
   }
 
-  public Response getUser(String username) {
+  public ValidatableResponse getUser(String username) {
     return given(spec)
         .log().all()
         .when()
-        .get("/" + username);
+        .get("/" + username)
+        .then();
   }
 
   public Response getUserWithAuth(String username, String password) {
@@ -43,10 +47,11 @@ public class UserApi {
         .get("/login");
   }
 
-  public Response deleteUser(String username) {
+  public ValidatableResponse deleteUser(String username) {
     return given(spec)
         .log().all()
         .when()
-        .delete("/" + username);
+        .delete("/" + username)
+        .then();
   }
 }

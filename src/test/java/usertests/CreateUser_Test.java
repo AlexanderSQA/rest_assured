@@ -14,8 +14,8 @@ import services.user.UserApi;
 
 
 public class CreateUser_Test {
-  UserApi userApi = new UserApi();
-  Faker faker = new Faker();
+  private UserApi userApi = new UserApi();
+  private Faker faker = new Faker();
 
   //Проверить, что при создании Юзера в поле message записывается id нового пользователя
   //Проверить, что при создании Юзера в поле type записывается значение "unknown"
@@ -34,13 +34,11 @@ public class CreateUser_Test {
         .build();
 
     userApi.createUser(user)
-        .then()
         .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/user/CreateUser.json"))
         .log().all()
         .extract().as(CreateUserResponseBody.class);
 
     GetUserResponseBody userResponseBody = userApi.getUser(user.getUsername())
-        .then()
         .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/user/GetUser.json"))
         .log().all().extract().as(GetUserResponseBody.class);
 

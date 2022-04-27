@@ -23,8 +23,8 @@ public class DeleteUser_Test {
   //Проверить, что телефон у клиента начинается с "+79"
   //Проверить, что пароль не пустой
   @Test
-  public void checkGetUser() {
-    Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpecUnique(404));
+  public void checkDeleteUser() {
+
     User user = User.builder()
         .firstName(faker.name().firstName())
         .lastName(faker.name().lastName())
@@ -36,26 +36,22 @@ public class DeleteUser_Test {
         .phone(faker.phoneNumber().cellPhone())
         .build();
 
+
     userApi.createUser(user)
-        .then()
         .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/user/CreateUser.json"))
         .log().all()
         .extract().as(CreateUserResponseBody.class);
 
     DeleteUserResponseBody deleteUserResponseBody = userApi.deleteUser(user.getUsername())
-        .then()
         .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/user/DeleteUser.json"))
         .log().all().extract().as(DeleteUserResponseBody.class);
 
-    ValidatableResponse response = userApi.getUser(user.getUsername())
-        .then()
+    userApi.getUser(user.getUsername())
         .body("message", equalTo("User not found"))
+        .assertThat().statusCode(404)
         .log().all();
 
     Assert.assertEquals(deleteUserResponseBody.getMessage(), user.getUsername());
-
-    //TODO дописать ассерты на Гет удаленного Юзера (схема ответа отличается. как быть?)
-    //TODO решить проблему со статус-кодами в методах. Причина падения.
 
   }
 }
