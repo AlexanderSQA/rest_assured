@@ -20,7 +20,7 @@ public class GetUserLogin_Test {
   //Проверить Начало стринги "logged in user session:" при корректном логировании
   @Test
   public void checkLoginUser() {
-    Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpec200());
+
     User user = User.builder()
         .username(faker.name().username())
         .password(faker.internet().password())

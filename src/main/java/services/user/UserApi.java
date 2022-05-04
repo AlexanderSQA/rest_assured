@@ -12,7 +12,6 @@ import java.util.Locale;
 
 public class UserApi {
   public static final String BASE_URL = System.getProperty("base_url").toLowerCase(Locale.ROOT);
-//  public static final String BASE_URL = "https://petstore.swagger.io/v2";
   private final RequestSpecification spec;
 
   public UserApi() {

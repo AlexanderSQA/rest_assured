@@ -21,7 +21,7 @@ public class CreateUser_Test {
   //Проверить, что при создании Юзера в поле type записывается значение "unknown"
   @Test
   public void checkCreateUser() {
-    Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpec200());
+
     User user = User.builder()
         .firstName(faker.name().firstName())
         .lastName(faker.name().lastName())
