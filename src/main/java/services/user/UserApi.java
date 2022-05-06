@@ -7,6 +7,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Locale;
 
 
@@ -14,6 +15,7 @@ public class UserApi {
   public static final String BASE_URL = System.getProperty("base_url").toLowerCase(Locale.ROOT);
   private final RequestSpecification spec;
 
+  @Autowired
   public UserApi() {
     spec = given()
         .baseUri(BASE_URL)

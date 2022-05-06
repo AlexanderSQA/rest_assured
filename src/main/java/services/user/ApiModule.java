@@ -1,7 +1,13 @@
 package services.user;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
 public class ApiModule {
-  protected void configure(){
-    bind
+
+  @Bean
+  public UserApi getUserApi() {
+    return new UserApi();
   }
 }

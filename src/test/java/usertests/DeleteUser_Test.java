@@ -1,22 +1,23 @@
 package usertests;
 
 import static org.hamcrest.Matchers.equalTo;
-import static services.user.UserApi.BASE_URL;
 
 import com.github.javafaker.Faker;
 import dto.user.CreateUserResponseBody;
 import dto.user.DeleteUserResponseBody;
 import dto.user.User;
 import io.restassured.module.jsv.JsonSchemaValidator;
-import io.restassured.response.ValidatableResponse;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import services.user.Specifications;
+import services.user.ApiModule;
 import services.user.UserApi;
 
 
 public class DeleteUser_Test {
-  UserApi userApi = new UserApi();
+  ApplicationContext context = new AnnotationConfigApplicationContext(ApiModule.class);
+  private UserApi userApi = context.getBean(UserApi.class);
   Faker faker = new Faker();
 
   //Проверить, что домен почты у пользователя "@ya.ru"

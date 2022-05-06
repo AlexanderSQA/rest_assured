@@ -1,20 +1,21 @@
 package usertests;
 
-import static services.user.UserApi.BASE_URL;
-
 import com.github.javafaker.Faker;
 import dto.user.CreateUserResponseBody;
 import dto.user.GetUserResponseBody;
 import dto.user.User;
 import io.restassured.module.jsv.JsonSchemaValidator;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import services.user.Specifications;
+import services.user.ApiModule;
 import services.user.UserApi;
 
 
 public class CreateUser_Test {
-  private UserApi userApi = new UserApi();
+  ApplicationContext context = new AnnotationConfigApplicationContext(ApiModule.class);
+  private UserApi userApi = context.getBean(UserApi.class);
   private Faker faker = new Faker();
 
   //Проверить, что при создании Юзера в поле message записывается id нового пользователя
